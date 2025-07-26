@@ -3,35 +3,30 @@ import { useNavigate } from "react-router-dom";
 
 function GoogleSuccess() {
   const navigate = useNavigate();
-useEffect(() => {
-    const url = new URL(window.location.href);
-    const token = url.searchParams.get("token");
-
-    console.log("✅ Redirected URL:", url.href);
-    console.log("✅ Extracted Token:", token);
-
-    if (token) {
-      try {
-        localStorage.setItem("token", token);
-        console.log("✅ Token saved to localStorage");
-
-        // Optional: confirm token is stored before navigating
-        const saved = localStorage.getItem("token");
-        if (saved) {
-          navigate("/dashboard");
-        } else {
-          console.warn("⚠️ Token not stored properly");
-          navigate("/");
-        }
-      } catch (err) {
-        console.error("❌ Failed to save token:", err);
-        navigate("/");
-      }
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      window.location.href = "/";
     } else {
-      console.warn("⚠️ No token found in URL");
-      navigate("/");
+      fetchNotes();
+      api
+        .get("/auth/me", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          setName(res.data.name);
+          setEmail(res.data.email);
+        })
+        .catch((err) => {
+          console.error("❌ Failed to load user", err);
+          localStorage.removeItem("token");
+          window.location.href = "/";
+        });
     }
-  }, [navigate]);
+  }, []);
+  
 
   return <p>🔐 Logging in via Google...</p>;
 }
