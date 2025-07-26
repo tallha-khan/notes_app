@@ -66,7 +66,7 @@ function Login() {
   <button onClick={handleSendOtp}>📩 Send OTP</button>
   <button
     onClick={() => {
-      window.location.href = "http://localhost:5000/api/auth/google";
+      window.location.href = "https://notes-backend-7je9.onrender.com/api/auth/google";
     }}
     className="google-btn"
   >

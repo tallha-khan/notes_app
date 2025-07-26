@@ -90,7 +90,7 @@ router.get(
     });
 
     console.log("✅ Google login successful. Redirecting with token:", token);
-    res.redirect(`http://localhost:3000/google-success?token=${token}`);
+    res.redirect(`https://notes-app-cyan-omega.vercel.app/google-success?token=${token}`);
   }
 );
 
