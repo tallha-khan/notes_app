@@ -1,27 +1,37 @@
 import { useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function GoogleSuccess() {
   const navigate = useNavigate();
-  const location = useLocation();
-
-  useEffect(() => {
+useEffect(() => {
     const url = new URL(window.location.href);
     const token = url.searchParams.get("token");
 
-    console.log("✅ URL:", window.location.href);
-    console.log("✅ Token from URL:", token);
+    console.log("✅ Redirected URL:", url.href);
+    console.log("✅ Extracted Token:", token);
 
     if (token) {
-      localStorage.setItem("token", token);
-      // Delay to ensure token is stored before redirect
-      setTimeout(() => {
-        navigate("/dashboard");
-      }, 100); // short delay to ensure setItem is committed
+      try {
+        localStorage.setItem("token", token);
+        console.log("✅ Token saved to localStorage");
+
+        // Optional: confirm token is stored before navigating
+        const saved = localStorage.getItem("token");
+        if (saved) {
+          navigate("/dashboard");
+        } else {
+          console.warn("⚠️ Token not stored properly");
+          navigate("/");
+        }
+      } catch (err) {
+        console.error("❌ Failed to save token:", err);
+        navigate("/");
+      }
     } else {
+      console.warn("⚠️ No token found in URL");
       navigate("/");
     }
-  }, [navigate, location]);
+  }, [navigate]);
 
   return <p>🔐 Logging in via Google...</p>;
 }
