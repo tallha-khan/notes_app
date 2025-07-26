@@ -8,7 +8,7 @@ require("./middleware/passport");
 
 const app = express();
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: ["http://localhost:3000", "https://notes-app-cyan-omega.vercel.app"],
   credentials: true
 }));
 app.use(express.json());

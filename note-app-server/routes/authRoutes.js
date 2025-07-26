@@ -90,7 +90,7 @@ router.get(
     });
 
     console.log("✅ Google login successful. Redirecting with token:", token);
-    res.redirect(`https://notes-app-cyan-omega.vercel.app/google-success?token=${token}`);
+    res.redirect(`${process.env.BASE_URL}/google-success?token=${token}`);
   }
 );
 
@@ -116,5 +116,6 @@ router.get("/me", async (req, res) => {
     res.status(401).json({ error: "Invalid token" });
   }
 });
+
 
 module.exports = router;
