@@ -90,7 +90,7 @@ router.get(
     });
 
     console.log("✅ Google login successful. Redirecting with token:", token);
-    res.redirect(`${process.env.FRONTEND_URL}/api/auth/api/auth/google/callback/google-success?token=${token}`);
+    res.redirect(`${process.env.FRONTEND_URL}/api/auth/google/callback/google-success?token=${token}`);
   }
 );
 
