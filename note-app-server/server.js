@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const session = require("express-session");
 const passport = require("passport");
+const MongoStore = require("connect-mongo");
 require("./middleware/passport");
 
 const app = express();
@@ -15,9 +16,13 @@ app.use(express.json());
 
 // ✅ Session middleware (required for passport)
 app.use(session({
-  secret: "noteappsecret",
+  secret: process.env.SESSION_SECRET || "noteappsecret",
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGO_URI,
+    collectionName: "sessions"
+  })
 }));
 app.use(passport.initialize());
 app.use(passport.session());
