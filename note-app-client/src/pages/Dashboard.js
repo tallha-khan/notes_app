@@ -50,7 +50,6 @@ function Dashboard() {
       api
         .get("/auth/me", { headers: getHeaders() })
         .then((res) => {
-          console.log("🧾 /auth/me response:", res.data); // Add this
           setEmail(res.data.email);
           setName(res.data.name);
         })

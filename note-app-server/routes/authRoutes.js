@@ -44,7 +44,6 @@ router.post("/signup", async (req, res) => {
 // 🔹 Verify OTP and issue JWT
 router.post("/verify", async (req, res) => {
   const { email, otp } = req.body;
-  console.log("📩 Received signup OTP request:", req.body);
   if (!email || !otp) {
     return res.status(400).json({ error: "Email and OTP required" });
   }
@@ -89,7 +88,6 @@ router.get(
       expiresIn: "7d",
     });
 
-    console.log("✅ Google login successful. Redirecting with token:", token);
     res.redirect(`${process.env.FRONTEND_URL}/google-success?token=${token}`);
   }
 );
