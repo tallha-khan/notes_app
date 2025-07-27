@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_BACKEND_URL,
+  baseURL: "https://notes-backend-7je9.onrender.com", // hardcoded for now
   withCredentials: true,
 });
 

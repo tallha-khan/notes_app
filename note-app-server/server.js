@@ -8,10 +8,22 @@ const MongoStore = require("connect-mongo");
 require("./middleware/passport");
 
 const app = express();
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://notes-app-cyan-omega.vercel.app"
+];
+
 app.use(cors({
-  origin: ["http://localhost:3000", "https://notes-app-cyan-omega.vercel.app"],
-  credentials: true
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
 }));
+
 app.use(express.json());
 
 // ✅ Session middleware (required for passport)
@@ -21,8 +33,10 @@ app.use(session({
   saveUninitialized: false,
   store: MongoStore.create({
     mongoUrl: process.env.MONGO_URI,
-    collectionName: "sessions"
+    dbName: "notesApp", // optional
+    collectionName: "sessions",
   })
+  
 }));
 app.use(passport.initialize());
 app.use(passport.session());
