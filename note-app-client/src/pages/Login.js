@@ -38,7 +38,7 @@ function Login() {
 
   return (
     <div className="login-container">
-      <h2>🔐 Login or Signup</h2>
+      <h2>Signup</h2>
       {step === 1 ? (
         <>
           <input
@@ -49,21 +49,22 @@ function Login() {
             required
           />
           <input
-            type="email"
-            placeholder="Email"
-            value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
-            required
-          />
-          <input
             type="date"
             placeholder="Date of Birth"
             value={form.dob}
             onChange={(e) => setForm({ ...form, dob: e.target.value })}
             required
           />
+          <input
+            type="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
+            required
+          />
+          
           <div className="button-group">
-  <button onClick={handleSendOtp}>📩 Send OTP</button>
+  <button onClick={handleSendOtp}>Get OTP</button>
   <button
     onClick={() => {
       window.location.href = "https://notes-backend-7je9.onrender.com/api/auth/google";
