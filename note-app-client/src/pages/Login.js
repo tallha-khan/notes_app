@@ -73,8 +73,9 @@ function Login() {
   >
     🔒 Login with Google
   </button>
-  <button>Already have an account <a href="">Sign In</a></button>
+  
 </div>
+<button>Already have an account <a href="">Sign In</a></button>
 
 
         </>
