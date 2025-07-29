@@ -38,10 +38,23 @@ function Login() {
 
   return (
     <div className="login-container">
-      <h2>SignIn</h2>
+      <h2>Signup</h2>
       {step === 1 ? (
         <>
-          
+          <input
+            type="text"
+            placeholder="Full Name"
+            value={form.name}
+            onChange={(e) => setForm({ ...form, name: e.target.value })}
+            required
+          />
+          <input
+            type="date"
+            placeholder="Date of Birth"
+            value={form.dob}
+            onChange={(e) => setForm({ ...form, dob: e.target.value })}
+            required
+          />
           <input
             type="email"
             placeholder="Email"
@@ -58,11 +71,12 @@ function Login() {
     }}
     className="google-btn"
   >
-    SignIn with Google
+    🔒 Login with Google
   </button>
   
 </div>
-<button class="sign-in" onClick={() => navigate("/")}>Don't have an account <a href="">Sign Up</a></button>
+<button class="sign-in"  onClick={() => navigate("/login")}
+>Already have an account <a href="">Sign In</a></button>
 
 
         </>
