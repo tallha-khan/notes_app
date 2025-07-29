@@ -5,17 +5,14 @@ import "../Login.css"; // Optional styling
 
 function Login() {
   const navigate = useNavigate();
-  const [form, setForm] = useState({
-    email: "",
-    name: "",
-    dob: "",
-  });
+  const [email, setEmail] = useState("");
+
   const [otp, setOtp] = useState("");
   const [step, setStep] = useState(1);
 
   const handleSendOtp = async () => {
     try {
-      const res = await api.post("/auth/signup", form);
+      const res = await api.post("/auth/signup", { email }); 
       alert(res.data.message);
       setStep(2);
     } catch (err) {
@@ -26,7 +23,7 @@ function Login() {
   const handleVerify = async () => {
     try {
       const res = await api.post("/auth/verify", {
-        email: form.email,
+        email,
         otp,
       });
       localStorage.setItem("token", res.data.token);
@@ -46,7 +43,7 @@ function Login() {
             type="email"
             placeholder="Email"
             value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
           
