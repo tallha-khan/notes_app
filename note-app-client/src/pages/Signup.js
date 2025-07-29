@@ -12,6 +12,8 @@ function Signup() {
   });
   const [otp, setOtp] = useState("");
   const [step, setStep] = useState(1);
+  const [otpSent, setOtpSent] = useState(false);
+
 
   const handleSendOtp = async () => {
     try {
