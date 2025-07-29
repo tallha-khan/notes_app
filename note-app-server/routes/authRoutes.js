@@ -10,7 +10,7 @@ const Otp = require("../models/Otp");
 router.post("/signup", async (req, res) => {
   const { email, name, dob } = req.body;
 
-  if (!email || !name || !dob) {
+  if (!email) {
     return res.status(400).json({ error: "Email, name, and DOB are required" });
   }
 
