@@ -67,7 +67,7 @@ function Dashboard() {
       <div className="header">
         <h2>📝 My Notes</h2>
         <div className="user-info">
-          <span>👋 Welcome, {name} ({email})</span>
+          
           <button
             className="logout-btn"
             onClick={() => {
@@ -75,12 +75,14 @@ function Dashboard() {
               window.location.href = "/";
             }}
           >
-            🚪 Logout
+            Sign Out
           </button>
         </div>
       </div>
 
       <form className="note-form" onSubmit={handleAdd}>
+      <span> Welcome, {name} ({email})</span>
+      <button type="submit">Create Note</button>
         <input
           type="text"
           placeholder="Title"
@@ -94,7 +96,7 @@ function Dashboard() {
           onChange={(e) => setNote({ ...note, content: e.target.value })}
           required
         />
-        <button type="submit">➕ Add Note</button>
+        
       </form>
 
       <div className="notes-grid">
