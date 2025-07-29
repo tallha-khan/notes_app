@@ -42,7 +42,7 @@ function Login() {
           <input
             type="email"
             placeholder="Email"
-            value={form.email}
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
@@ -66,7 +66,7 @@ function Login() {
       ) : (
         <>
         <div class="button-group">
-          <p>✅ OTP sent to {form.email}</p>
+          <p>✅ OTP sent to {email}</p>
           <input
             type="text"
             placeholder="Enter OTP"
