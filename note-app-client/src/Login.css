@@ -40,7 +40,6 @@ body {
 
 .login-container button {
   background-color: #007bff;
-  margin: 8px 0;
   color: #fff;
   border: none;
   padding: 12px;
@@ -61,5 +60,10 @@ body {
   margin-bottom: 15px;
 }
 button {
-  
+  margin: 8px 0;
+}
+
+.sign-in{
+  background-color: #ffffff;
+  font-size: 12px;
 }
