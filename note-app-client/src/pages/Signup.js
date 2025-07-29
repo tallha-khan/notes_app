@@ -71,7 +71,7 @@ function Login() {
     }}
     className="google-btn"
   >
-    🔒 Login with Google
+    Sign Up with Google
   </button>
   
 </div>

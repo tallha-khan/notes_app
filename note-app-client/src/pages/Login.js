@@ -5,17 +5,17 @@ import "../Login.css"; // Optional styling
 
 function Login() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  const [form, setForm] = useState({
+    email: "",
+    name: "",
+    dob: "",
+  });
   const [otp, setOtp] = useState("");
   const [step, setStep] = useState(1);
 
   const handleSendOtp = async () => {
     try {
-      const res = await api.post("/auth/signup", {
-        email,
-        name: "Guest",
-        dob: "2000-01-01", // placeholder
-      });
+      const res = await api.post("/auth/signup", form);
       alert(res.data.message);
       setStep(2);
     } catch (err) {
@@ -26,7 +26,7 @@ function Login() {
   const handleVerify = async () => {
     try {
       const res = await api.post("/auth/verify", {
-        email,
+        email: form.email,
         otp,
       });
       localStorage.setItem("token", res.data.token);
