@@ -81,7 +81,7 @@ function Dashboard() {
       </div>
 
       <form className="note-form" onSubmit={handleAdd}>
-      <span> Welcome, {name} ({email})</span>
+      <span> Welcome   {name} <br/>({email})</span>
       <button type="submit">Create Note</button>
         <input
           type="text"
