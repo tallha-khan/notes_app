@@ -65,7 +65,7 @@ function Dashboard() {
   return (
     <div className="dashboard-container">
       <div className="header">
-        <h2>📝 My Notes</h2>
+        <h2>My Notes</h2>
         <div className="user-info">
           
           <button
@@ -104,7 +104,7 @@ function Dashboard() {
           <div key={n._id} className="note-card">
             <h3>{n.title}</h3>
             <p>{n.content}</p>
-            <button onClick={() => handleDelete(n._id)}>🗑 Delete</button>
+            <button onClick={() => handleDelete(n._id)}>🗑</button>
           </div>
         ))}
       </div>
