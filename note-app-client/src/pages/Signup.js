@@ -86,11 +86,11 @@ function Signup() {
           }
           className="google-btn"
         >
-          🔐 Login with Google
+          Sign Up with Google
         </button>
       </div>
 
-      <button className="sign-in" onClick={() => navigate("/signin")}>
+      <button className="sign-in" onClick={() => navigate("/login")}>
         Already have an account? <span style={{ color: "blue" }}>Sign In</span>
       </button>
     </div>
