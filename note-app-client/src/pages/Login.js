@@ -81,6 +81,7 @@ function Login() {
         </>
       ) : (
         <>
+        <div class="button-group">
           <p>✅ OTP sent to {form.email}</p>
           <input
             type="text"
@@ -90,7 +91,7 @@ function Login() {
           />
           <button onClick={handleVerify}>✅ Verify</button>
 
-          
+          </div>
         </>
       )}
     </div>

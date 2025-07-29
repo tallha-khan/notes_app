@@ -38,7 +38,7 @@ body {
   border-color: #007bff;
 }
 
-.login-container button {
+.button-group button {
   background-color: #007bff;
   color: #fff;
   border: none;
@@ -50,7 +50,7 @@ body {
   transition: background-color 0.3s ease;
 }
 
-.login-container button:hover {
+.button-group button:hover {
   background-color: #0056b3;
 }
 
