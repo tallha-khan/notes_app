@@ -11,7 +11,7 @@ function Signup() {
     dob: "",
   });
   const [otp, setOtp] = useState("");
-  const [step, setStep] = useState(1);
+  
   const [otpSent, setOtpSent] = useState(false);
 
 
@@ -19,7 +19,8 @@ function Signup() {
     try {
       const res = await api.post("/auth/signup", form);
       alert(res.data.message);
-      setStep(2);
+      setOtpSent(true);
+     
     } catch (err) {
       alert("❌ Failed to send OTP");
     }
