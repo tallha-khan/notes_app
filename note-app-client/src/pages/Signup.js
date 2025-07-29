@@ -3,7 +3,7 @@ import api from "../services/api";
 import { useNavigate } from "react-router-dom";
 import "../Login.css"; // Optional styling
 
-function Login() {
+function Signup() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     email: "",
@@ -39,8 +39,6 @@ function Login() {
   return (
     <div className="login-container">
       <h2>Signup</h2>
-      {step === 1 ? (
-        <>
           <input
             type="text"
             placeholder="Full Name"
@@ -63,40 +61,38 @@ function Login() {
             required
           />
           
-          <div className="button-group">
-  <button onClick={handleSendOtp}>Get OTP</button>
-  <button
-    onClick={() => {
-      window.location.href = "https://notes-backend-7je9.onrender.com/api/auth/google";
-    }}
-    className="google-btn"
-  >
-    Sign Up with Google
-  </button>
-  
-</div>
-<button class="sign-in"  onClick={() => navigate("/login")}
->Already have an account <a href="">Sign In</a></button>
-
-
-        </>
-      ) : (
-        <>
-        <div class="button-group">
-          <p>✅ OTP sent to {form.email}</p>
-          <input
-            type="text"
-            placeholder="Enter OTP"
-            value={otp}
-            onChange={(e) => setOtp(e.target.value)}
-          />
-          <button onClick={handleVerify}>✅ Verify</button>
-
-          </div>
-        </>
+          {otpSent && (
+        <input
+          type="text"
+          placeholder="Enter OTP"
+          value={otp}
+          onChange={(e) => setOtp(e.target.value)}
+        />
       )}
+
+      <div className="button-group">
+        {!otpSent ? (
+          <button onClick={handleSendOtp}>📩 Get OTP</button>
+        ) : (
+          <button onClick={handleVerify}>✅ Verify</button>
+        )}
+
+        <button
+          onClick={() =>
+            (window.location.href =
+              "https://notes-backend-7je9.onrender.com/api/auth/google")
+          }
+          className="google-btn"
+        >
+          🔐 Login with Google
+        </button>
+      </div>
+
+      <button className="sign-in" onClick={() => navigate("/signin")}>
+        Already have an account? <span style={{ color: "blue" }}>Sign In</span>
+      </button>
     </div>
   );
 }
 
-export default Login;
+export default Signup;

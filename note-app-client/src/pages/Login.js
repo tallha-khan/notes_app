@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
-import "../Login.css"; // Optional styling
+import "../Login.css";
 
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-
   const [otp, setOtp] = useState("");
-  const [step, setStep] = useState(1);
+  const [otpSent, setOtpSent] = useState(false);
 
   const handleSendOtp = async () => {
     try {
-      const res = await api.post("/auth/signup", { email }); 
+      const res = await api.post("/auth/signup", { email });
       alert(res.data.message);
-      setStep(2);
+      setOtpSent(true);
     } catch (err) {
       alert("❌ Failed to send OTP");
     }
@@ -35,49 +34,45 @@ function Login() {
 
   return (
     <div className="login-container">
-      <h2>SignIn</h2>
-      {step === 1 ? (
-        <>
-          
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          
-          <div className="button-group">
-  <button onClick={handleSendOtp}>Get OTP</button>
-  <button
-    onClick={() => {
-      window.location.href = "https://notes-backend-7je9.onrender.com/api/auth/google";
-    }}
-    className="google-btn"
-  >
-    SignIn with Google
-  </button>
-  
-</div>
-<button class="sign-in" onClick={() => navigate("/")}>Don't have an account <a href="">Sign Up</a></button>
+      <h2>Sign In</h2>
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
 
-
-        </>
-      ) : (
-        <>
-        <div class="button-group">
-          <p>✅ OTP sent to {email}</p>
-          <input
-            type="text"
-            placeholder="Enter OTP"
-            value={otp}
-            onChange={(e) => setOtp(e.target.value)}
-          />
-          <button onClick={handleVerify}>✅ Verify</button>
-
-          </div>
-        </>
+      {otpSent && (
+        <input
+          type="text"
+          placeholder="Enter OTP"
+          value={otp}
+          onChange={(e) => setOtp(e.target.value)}
+        />
       )}
+
+      <div className="button-group">
+        {!otpSent ? (
+          <button onClick={handleSendOtp}>📩 Get OTP</button>
+        ) : (
+          <button onClick={handleVerify}>✅ Verify</button>
+        )}
+
+        <button
+          onClick={() =>
+            (window.location.href =
+              "https://notes-backend-7je9.onrender.com/api/auth/google")
+          }
+          className="google-btn"
+        >
+          🔐 Login with Google
+        </button>
+      </div>
+
+      <button className="sign-in" onClick={() => navigate("/")}>
+        Don't have an account? <span style={{ color: "blue" }}>Sign Up</span>
+      </button>
     </div>
   );
 }
